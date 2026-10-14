@@ -1,4 +1,14 @@
-"""
+# AI-Driven Pitch & Interview Analyzer
+
+An end-to-end Python pipeline that captures real-time voice input, extracts acoustic metrics (pitch, cadence, silence detection), transcribes speech using OpenAI Whisper, and generates a structured, professional feedback report using Google Gemini AI.
+
+---
+
+## System Architecture
+
+The application is structured into four distinct modular stages, ensuring a clean separation of concerns from hardware ingestion to AI evaluation:
+
+```mermaid
 graph TD
     subgraph Input ["1. Audio Ingestion"]
         Mic["Microphone Input"] --> Buffer["Audio Stream / Buffer"]
@@ -8,13 +18,13 @@ graph TD
         Buffer --> Pitch["Pitch Extraction (F0)"]
         Buffer --> Cadence["Cadence & WPM"]
         Buffer --> VAD["Voice Activity & Pauses"]
-        Buffer --> STT["Speech-to-Text (e.g. Whisper)"]
+        Buffer --> STT["Speech-to-Text (Whisper)"]
     end
 
     subgraph Intelligence ["3. Multi-Modal Analysis & Evaluation"]
         Pitch & Cadence & VAD --> Metrics["Acoustic Metrics Aggregator"]
         STT --> Transcript["Text Transcript & Keywords"]
-        Metrics & Transcript --> LLM["AI Agents / Evaluation Engine"]
+        Metrics & Transcript --> LLM["Google Gemini AI Coach"]
     end
 
     subgraph Output ["4. Output"]
